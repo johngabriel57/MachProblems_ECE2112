@@ -1,0 +1,22 @@
+n = 0:199;
+x = input('Input the value for x(n): ');
+x = sin(x);
+x2 = x.*(n+1);
+x3 = x.*(n+2);
+x4 = x.*(n-1);
+x5 = x.*(n-2);
+for k = n
+    if k == 0
+        y = (-1.5*x) + (2*x2) - (0.5*x3);
+        plot(y, 'g','linewidth',1)
+        hold on
+    elseif k > 0 && k <= 198
+        y = 0.5*x2 - (0.5*x4);
+        plot(y,'b','linewidth',1)
+        hold on
+    elseif k == 199
+        y = (1.5*x) - (2*x4) + (0.5*x5);
+        plot(y, 'r','linewidth',1)
+    end
+end
+
