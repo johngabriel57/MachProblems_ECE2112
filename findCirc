@@ -1,3 +1,4 @@
+%to use function input values for x1,x2,x3,y1,y2,y3 (ex. findCirc (1,2,2,3,3,3))
 function [D,E,F,center,radius] = findCirc(x1,y1,x2,y2,x3,y3)
 fprintf('First Point Coordinates: (%.0f, %.0f)\n',x1,y1)
 fprintf('Second Point Coordinates: (%.0f, %.0f)\n',x2,y2)
