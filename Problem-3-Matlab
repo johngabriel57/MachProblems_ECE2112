@@ -1,0 +1,14 @@
+xy = input('Enter n amount of [x1,y2],[x2,y2] points in the form [x1 y1; x2 y2;...]: ');
+for i = length(xy)-1
+   poly = polyfit(xy(:,1),xy(:,2),i);
+   val = polyval(poly, xy(:,1));
+   norm = norm(xy(:,2) - val);
+   A = ([i,norm]);
+   if i == 1
+       x = A;
+   elseif xy(2) >= A(2)
+       y = A(1);
+       poly = polyfit(xy(:,1),xy(:,2),y);
+   end
+end
+fprintf('Coefficients = %.4f\n',poly)
