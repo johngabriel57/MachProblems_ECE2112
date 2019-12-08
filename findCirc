@@ -1,0 +1,31 @@
+function [D,E,F,center,radius] = findCirc(x1,y1,x2,y2,x3,y3)
+fprintf('First Point Coordinates: (%.0f, %.0f)\n',x1,y1)
+fprintf('Second Point Coordinates: (%.0f, %.0f)\n',x2,y2)
+fprintf('Third Point Coordinates: (%.0f, %.0f)\n',x3,y3)
+% x1^2 + y1^2 + D*x1 + E*y1 + F = 0
+% x2^2 + y2^2 + D*x2 + E*y2 + F = 0
+% x3^2 + y3^2 + D*x3 + E*y3 + F = 0
+% (3 Equations 3 Unknown)
+% Eq1: D*x1 + E*y1 + F = -x1^2 - y1^2
+% Eq2: D*x2 + E*y2 + F = -x2^2 - y2^2
+% Eq3: D*x3 + E*y3 + F = -x3^2 - y3^2
+% D=x1 E=x2 F=x3
+a1 = -x1^2 - (y1)^2;
+a2 = -x2^2 - (y2)^2;
+a3 = -x3^2 - (y3)^2;
+A = [x1,y1,1; x2,y2,1; x3,y3,1];
+B = [a1;a2;a3];
+DEF = linsolve(A,B);
+D = round(DEF(1));
+E = round(DEF(2));
+F = round(DEF(3));
+fprintf('D = %.0f\n',D)
+fprintf('E = %.0f\n',E)
+fprintf('F = %.0f\n',F)
+% Completing the Squares
+% (x1^2 + D*x1 + h)+(y1^2 + E*y1 + k) = -F
+h = (D/2)^2;
+k = (E/2)^2;
+fprintf('Center: (%.0f, %.0f)\n',h,k)
+r = (x1-h)^2 + (y1-k)^2;
+fprintf('Radius: %.0f',r)
