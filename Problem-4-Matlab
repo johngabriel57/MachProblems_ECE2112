@@ -1,0 +1,36 @@
+h = input('Enter the initial height of the projectile above the ground (in meters): ');
+vo = input('Enter the magnitude of the velocity (in m/s): ');
+angle = input('Enter the angle (in degrees) with respect to the +x-axis at which the projectile is fired: ');
+ax = input('Enter the x-component of the acceleration (in m/s^2). Consider the sign.: ');
+ay = input('Enter the y-component of the acceleration (in m/s^2). Consider the sign.: ');
+ayf = abs(ay);
+vox = vo*cosd(angle); %velocity x-component
+voy = vo*sind(angle); %velocity y-component
+
+if ay == 0
+    nozero = 'the y-component of the acceleration should not be 0'; %message appears if inputted ay = 0
+    error(nozero)
+end
+
+if h == 0 %initial height is ground
+    t = (2*voy)/ayf; %time it takes from initial to final point
+    ti = (0:0.01:t);
+    x = (vox.*ti)+((1/2).*ax.*ti.^2);
+    y = (voy.*ti)+((1/2).*ay.*ti.^2);
+    plot(x,y,'r','linewidth',1)
+    title('Projectile Trajectory')
+    grid on
+    xlabel('Range')
+    ylabel('Height')
+else %initial height is not on ground
+    hf = ((voy^2))/2*ayf; %maximum height formula
+    t = (-voy+sqrt(voy^2-4*(1/2)*abs(ay)*(h-hf)))/ayf; %using quadratic formula to find time
+    ti = (0:0.01:t);
+    x = (vox.*ti)+((1/2).*ax.*ti.^2);
+    y = (voy.*ti)+((1/2).*ay.*ti.^2)+h;
+    plot(x,y,'r','linewidth',1)
+    title('Projectile Trajectory')
+    grid on 
+    xlabel('Range')
+    ylabel('Height') 
+end
